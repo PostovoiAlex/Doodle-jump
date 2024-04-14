@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Doodler : MonoBehaviour
 {
@@ -44,7 +45,16 @@ public class Doodler : MonoBehaviour
 
         DisableCollider();
 
-        isJumped=true;
+        isJumped = true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Lose zone"))
+        {
+            Debug.Log("Dead");
+            SceneManager.LoadScene("Game");
+        }
     }
 
     private void DisableCollider()
