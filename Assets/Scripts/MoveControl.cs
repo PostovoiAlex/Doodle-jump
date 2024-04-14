@@ -4,10 +4,31 @@ using UnityEngine.UIElements;
 public class MoveControl : MonoBehaviour
 {
     [SerializeField] Rigidbody2D rb2;
-    [SerializeField] Collider2D doodlerCollider;
     [SerializeField] float speed = 5f;
     [SerializeField] Doodler doodler;
     float direction = 0;
+
+    private Camera mainCamera;
+    private float cameraWidth;
+    private float cameraLeftBorder;
+    private float cameraRightBorder;
+    private float borderOffset = 1f;
+
+
+
+    private void Start()
+    {
+        mainCamera = Camera.main;
+        cameraWidth = mainCamera.orthographicSize * mainCamera.aspect;
+
+        Vector3 cameraPosition = mainCamera.transform.position;
+
+        cameraLeftBorder = cameraPosition.x - cameraWidth;
+        cameraRightBorder = cameraPosition.x + cameraWidth;
+
+    }
+
+
 
     private void Update()
     {
@@ -18,28 +39,27 @@ public class MoveControl : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A))
         {
-            //    Debug.Log("A key pressed");
             direction = -1;
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            //   Debug.Log("D key pressed");
             direction = 1;
         }
         else
         {
             direction = 0;
         }
-        
-    }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("border"))
+        //Doodler teleport
+        if(doodler.transform.position.x <= cameraLeftBorder)
         {
-            Debug.Log("Border");
-            doodler.transform.position = new Vector2(doodler.transform.position.x * -1, doodler.transform.position.y); 
+            doodler.transform.position = new Vector2(cameraRightBorder - borderOffset, doodler.transform.position.y);
         }
+        else if(doodler.transform.position.x >= cameraRightBorder)
+        {
+            doodler.transform.position = new Vector2(cameraLeftBorder + borderOffset, doodler.transform.position.y);
+        }
+        
     }
 
 
