@@ -11,6 +11,7 @@ public class Doodler : MonoBehaviour
     bool isJumped = false;
 
     public Action<float> OnJumped;
+    public Action OnDead;
 
     private float maxPosY = -1;
 
@@ -28,7 +29,6 @@ public class Doodler : MonoBehaviour
         {
 
             EnableCollider();
-
             isJumped = false;
         }
 
@@ -53,7 +53,11 @@ public class Doodler : MonoBehaviour
         if(collision.CompareTag("Lose zone"))
         {
             Debug.Log("Dead");
-            SceneManager.LoadScene("Game");
+            if(OnDead != null)
+            {
+                OnDead.Invoke();
+            }
+            SceneManager.LoadScene(0);
         }
     }
 
