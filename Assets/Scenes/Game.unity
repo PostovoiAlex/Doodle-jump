@@ -158,7 +158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -0.19996643, y: -0.60001373}
+  m_AnchoredPosition: {x: -0.19998169, y: -0.6000061}
   m_SizeDelta: {x: 130, y: 20}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &75909399
@@ -611,7 +611,7 @@ MonoBehaviour:
   speed: 5
   offsetY: 1
   scoreText: {fileID: 580168871}
-  bestScoreText: {fileID: 0}
+  bestScoreText: {fileID: 75909399}
 --- !u!1 &580168869
 GameObject:
   m_ObjectHideFlags: 0
