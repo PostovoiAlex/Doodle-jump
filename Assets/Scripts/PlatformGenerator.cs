@@ -18,7 +18,7 @@ public class PlatformGenerator : MonoBehaviour
     private void OnPlatformDestroyed(Platform platform)
     {
         Transform t = platform.gameObject.transform;
-        t.position = new Vector3(0, Random.Range(5, 10), 0);
+        t.position += new Vector3(0, Random.Range(6, 7), 0);
 
         t.localScale = new Vector3(Random.Range(2, 5), t.localScale.y, t.localScale.z) ;
     }
