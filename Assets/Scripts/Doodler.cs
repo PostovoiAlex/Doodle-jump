@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Doodler : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Doodler : MonoBehaviour
     bool isJumped = false;
 
     public Action<float> OnJumped;
+    public Action OnDead;
 
     private float maxPosY = -1;
 
@@ -27,7 +29,6 @@ public class Doodler : MonoBehaviour
         {
 
             EnableCollider();
-
             isJumped = false;
         }
 
@@ -44,7 +45,20 @@ public class Doodler : MonoBehaviour
 
         DisableCollider();
 
-        isJumped=true;
+        isJumped = true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Lose zone"))
+        {
+            Debug.Log("Dead");
+            if(OnDead != null)
+            {
+                OnDead.Invoke();
+            }
+            SceneManager.LoadScene(0);
+        }
     }
 
     private void DisableCollider()
